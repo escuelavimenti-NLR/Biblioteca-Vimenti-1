@@ -894,6 +894,7 @@ function deleteLoan(id){
   save();updateStats();renderRecords();
 }
 function renderRecords(){
+  let loans=[...S.loans];
   if(S.retFilter==='act') loans=loans.filter(l=>!l.returned&&!isOv(l.dueDate));
   else if(S.retFilter==='ov') loans=loans.filter(l=>!l.returned&&isOv(l.dueDate));
   else if(S.retFilter==='ret') loans=loans.filter(l=>l.returned);
