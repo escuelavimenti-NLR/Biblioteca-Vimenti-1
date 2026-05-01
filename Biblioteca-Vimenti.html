@@ -1473,7 +1473,7 @@ function renderBookStep(){
     <div class="barcode-field">
       <div class="barcode-ico">🔫</div>
       <input type="text" id="barcode-input" inputmode="numeric"
-        placeholder="Pasa el escáner o escribe el código…"
+        placeholder="Escribe o escanea el código — filtra en tiempo real…"
         oninput="onBarcodeInput(this.value)"
         autocomplete="off" autocorrect="off" spellcheck="false"/>
     </div>
@@ -1641,23 +1641,29 @@ function confirmReturn(id){
 }
 
 // ── BARCODE INPUT (loan) ──
-let barcodeTimer=null;
 function onBarcodeInput(val){
-  clearTimeout(barcodeTimer);
-  if(!val.trim()) return;
-  // Barcode scanners send all digits + Enter very fast (~50ms total)
-  // We try to match immediately; also set a short timer as fallback
-  barcodeTimer=setTimeout(()=>{
-    const code=val.trim().replace(/[\r\n]/g,'');
-    const book=S.books.find(b=>b.code===code);
-    const badge=document.getElementById('bk-badge');
-    if(book){
-      pickBook(book);
-      if(badge){badge.className='sbadge ok';badge.textContent='✓ Libro encontrado: '+book.title}
-    } else if(code.length>=4){
-      if(badge){badge.className='sbadge err';badge.textContent='Código no encontrado: '+code}
-    }
-  },120);
+  const code=val.trim();
+  const badge=document.getElementById('bk-badge');
+  if(badge) badge.className='sbadge';
+
+  // Filter book list by code in real time
+  const fl=code ? S.books.filter(b=>b.code&&b.code.includes(code)) : S.books;
+  const el=document.getElementById('book-list');
+  if(el) el.innerHTML=renderBookRows(fl);
+
+  // If exact match, select automatically without re-rendering
+  const exact=S.books.find(b=>b.code===code);
+  if(exact){
+    S.selBook=exact;
+    // Highlight in list
+    document.querySelectorAll('#book-list .lrow').forEach(r=>r.classList.remove('sel'));
+    const rows=document.querySelectorAll('#book-list .lrow');
+    if(rows.length===1) rows[0].classList.add('sel');
+    // Enable continue button
+    const btn=document.getElementById('bk-cont');
+    if(btn) btn.removeAttribute('disabled');
+    if(badge){badge.className='sbadge ok';badge.textContent='✓ '+exact.title;}
+  }
 }
 
 // ── BARCODE INPUT (return) ──
