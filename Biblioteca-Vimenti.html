@@ -432,6 +432,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bk);color:var(--bk);-webk
     </div>
     <div style="margin-top:11px;display:flex;gap:9px">
       <button class="btnp" style="flex:1" onclick="closeModal('m-books');openModal('m-addbook')">+ Añadir uno</button>
+      <button class="btnp grn" style="flex:1" onclick="exportBooks()">⬇ Exportar</button>
       <button class="btnp drk" style="flex:1" onclick="closeModal('m-books')">Listo</button>
     </div>
   </div>
@@ -1718,6 +1719,22 @@ function renderRecords(){
 }
 
 // ── EXCEL ──
+function exportBooks(){
+  if(!S.books.length){showToast('⚠ No hay libros para exportar');return}
+  const cols=['Título','Autor','Código'];
+  const rows=S.books.map(b=>[b.title,b.author||'',b.code||'']);
+  const escape=v=>'"'+String(v||'').replace(/"/g,'""')+'"';
+  const csv='\uFEFF'+[cols,...rows].map(r=>r.map(escape).join(',')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='Libros_Vimenti_'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
+  showToast('✅ Lista de libros descargada');
+}
+
 function exportExcel(){
   if(!S.loans.length){showToast('⚠ No hay registros para exportar');return}
 
