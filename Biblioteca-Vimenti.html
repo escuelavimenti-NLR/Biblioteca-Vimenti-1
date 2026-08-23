@@ -256,7 +256,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bk);color:var(--bk);-webk
     </div>
   </div>
   <div class="home-panel">
-    <div style="font-size:0.72rem;color:var(--mu);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">📅 " + ACTIVE_PERIOD + "</div>
+    <div id="period-badge" style="font-size:0.72rem;color:var(--mu);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">📅 2026-2027 · Primer Semestre</div>
     <h2>¿Qué vas a hacer hoy?</h2>
     <div class="home-btns">
       <button class="hbig borrow" onclick="startLoan()">
@@ -274,7 +274,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bk);color:var(--bk);-webk
       <div class="hstat"><div class="hstat-n green" id="s-ret">0</div><div class="hstat-l">Total leídos</div></div>
     </div>
     <button onclick="showView('v-records');renderRecords()" style="width:100%;margin-top:12px;padding:11px;background:none;border:2px solid var(--wm);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--mu);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s" onmouseover="this.style.borderColor='var(--or)';this.style.color='var(--bk)'" onmouseout="this.style.borderColor='var(--wm)';this.style.color='var(--mu)'">
-      📋 Ver registros &amp; exportar Excel
+      📋 Ver registros
     </button>
   </div>
   <button class="fab" onclick="openModal('m-settings')">⚙</button>
