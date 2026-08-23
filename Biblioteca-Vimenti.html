@@ -256,6 +256,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bk);color:var(--bk);-webk
     </div>
   </div>
   <div class="home-panel">
+    <div style="font-size:0.72rem;color:var(--mu);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">📅 " + ACTIVE_PERIOD + "</div>
     <h2>¿Qué vas a hacer hoy?</h2>
     <div class="home-btns">
       <button class="hbig borrow" onclick="startLoan()">
@@ -432,13 +433,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--bk);color:var(--bk);-webk
     </div>
     <div style="margin-top:11px;display:flex;gap:9px">
       <button class="btnp" style="flex:1" onclick="closeModal('m-books');openModal('m-addbook')">+ Añadir uno</button>
-      <button class="btnp grn" style="flex:1" onclick="exportBooks()">⬇ Exportar</button>
       <button class="btnp drk" style="flex:1" onclick="closeModal('m-books')">Listo</button>
     </div>
   </div>
 </div>
 
 <script>
+
+const TEACHERS=[
+  {id:'t1',name:'Claudia Ramírez',grade:'kinder',group:'K-1',role:'teacher'},
+  {id:'t2',name:'Karla Vázquez',grade:'kinder',group:'K-2',role:'teacher'},
+  {id:'t3',name:'Angélica Milán',grade:'first',group:'1-1',role:'teacher'},
+  {id:'t4',name:'Leslie Casillas',grade:'first',group:'1-2',role:'teacher'},
+  {id:'t5',name:'Alanis Rodríguez',grade:'second',group:'2-1',role:'teacher'},
+  {id:'t6',name:'Aliris Sánchez',grade:'second',group:'2-2',role:'teacher'},
+  {id:'t7',name:'Zuliem Hernández',grade:'third',group:'3-1',role:'teacher'},
+  {id:'t8',name:'Crystal Oliver',grade:'third',group:'3-2',role:'teacher'},
+  {id:'t9',name:'Neysha Beltrán',grade:'special',group:'Especial',role:'teacher'},
+  {id:'t10',name:'Ángel Gracia',grade:'special',group:'Especial',role:'teacher'},
+  {id:'t11',name:'Keyshla Marrero',grade:'special',group:'Especial',role:'teacher'},
+];
+
+const REPS=[]; // 5 representatives - add from Admin when ready
+
+const ACTIVE_PERIOD='2026-2027 · Primer Semestre';
 const GRADES=[
   {id:'kinder',name:'Kínder',emoji:'🌱'},
   {id:'first',name:'1er Grado',emoji:'⭐'},
@@ -449,166 +467,166 @@ const GRADES=[
 const GROUPS=['K-1','K-2','1-1','1-2','2-1','2-2','3-1','3-2'];
 
 const DEF_STU=[
-  {id:'r1',name:'Alexyam Jerome Lefebre Rodríguez',grade:'kinder',group:'K-1'},
-  {id:'r2',name:'Derick Iván Carmona Marrero',grade:'kinder',group:'K-1'},
-  {id:'r3',name:'Diheirys Aliz Flores',grade:'kinder',group:'K-1'},
-  {id:'r4',name:'Gala Atenea Damiani-Mejías',grade:'kinder',group:'K-1'},
-  {id:'r5',name:'Gema Amaia Garay Ruiz',grade:'kinder',group:'K-1'},
-  {id:'r6',name:'Grace Gianni Díaz Mercado',grade:'kinder',group:'K-1'},
-  {id:'r7',name:'Janeiro Santos Castillo',grade:'kinder',group:'K-1'},
-  {id:'r8',name:'Jeylianiz Juliette Márquez Villanueva',grade:'kinder',group:'K-1'},
-  {id:'r9',name:'John Paul Lisboa Rosado',grade:'kinder',group:'K-1'},
-  {id:'r10',name:'Kaiden Jahir Delgado Acevedo',grade:'kinder',group:'K-1'},
-  {id:'r11',name:'Kevin Omany Castro Meléndez',grade:'kinder',group:'K-1'},
-  {id:'r12',name:'Kiomary Yeriany Pizarro Verdejo',grade:'kinder',group:'K-1'},
-  {id:'r13',name:'Liam Gabriel Catalá Jiménez',grade:'kinder',group:'K-1'},
-  {id:'r14',name:'Mateo Ríos Miranda',grade:'kinder',group:'K-1'},
-  {id:'r15',name:'Noah Kail Rosado Rivera',grade:'kinder',group:'K-1'},
-  {id:'r16',name:'Ocean Joel Hernández Adorno',grade:'kinder',group:'K-1'},
-  {id:'r17',name:'Valentino Centeno Carrillo',grade:'kinder',group:'K-1'},
-  {id:'r18',name:'Vicnier Antoniel Esquilín Fonseca',grade:'kinder',group:'K-1'},
-  {id:'r19',name:'Yeilianis Michelle Ayala Estela',grade:'kinder',group:'K-1'},
-  {id:'r20',name:'Zoriannys Nicole Serrano Rodríguez',grade:'kinder',group:'K-1'},
-  {id:'r21',name:'Adrián Mateo Andrades',grade:'kinder',group:'K-2'},
-  {id:'r22',name:'Allison Isell Calderón Rodríguez',grade:'kinder',group:'K-2'},
-  {id:'r23',name:'Ángel Yunior Lorenzo Barry',grade:'kinder',group:'K-2'},
-  {id:'r24',name:'Dashiel José Tirado González',grade:'kinder',group:'K-2'},
-  {id:'r25',name:'Erick Javier Camacho Colón',grade:'kinder',group:'K-2'},
-  {id:'r26',name:'Gretchen Candelario Santana',grade:'kinder',group:'K-2'},
-  {id:'r27',name:'Jennyeliz Espada Márquez',grade:'kinder',group:'K-2'},
-  {id:'r28',name:'Jeremías Zaid Hernández Márquez',grade:'kinder',group:'K-2'},
-  {id:'r29',name:'Jhanielyz Zoé Díaz Santiago',grade:'kinder',group:'K-2'},
-  {id:'r30',name:'Jhosayan Joel Segarra Falcón',grade:'kinder',group:'K-2'},
-  {id:'r31',name:'Lady Ainarah López Barreto',grade:'kinder',group:'K-2'},
-  {id:'r32',name:'Leanna Isabel Sánchez Gómez',grade:'kinder',group:'K-2'},
-  {id:'r33',name:'Lucas Gael Meléndez Oyola',grade:'kinder',group:'K-2'},
-  {id:'r34',name:'Mateo José De Jesús Hernández',grade:'kinder',group:'K-2'},
-  {id:'r35',name:'Rafael Alberto Irizarry López',grade:'kinder',group:'K-2'},
-  {id:'r36',name:'Ryan Daniel Torres Cisnero',grade:'kinder',group:'K-2'},
-  {id:'r37',name:'Xaileen Torres Díaz',grade:'kinder',group:'K-2'},
-  {id:'r38',name:'Xandel Gael Pizarro Miranda',grade:'kinder',group:'K-2'},
-  {id:'r39',name:'Yaveth Giomar Adorno Guevara',grade:'kinder',group:'K-2'},
-  {id:'r40',name:'Zuriamdhalee López Méndez',grade:'kinder',group:'K-2'},
-  {id:'r41',name:'Ahilany Sophia Garrafa Batista',grade:'first',group:'1-1'},
-  {id:'r42',name:'Ayla Amaia Pizarro Santini',grade:'first',group:'1-1'},
-  {id:'r43',name:'Catalina Kristal Serrano Acevedo',grade:'first',group:'1-1'},
-  {id:'r44',name:'Deyluanis Michelle Márquez Villanueva',grade:'first',group:'1-1'},
-  {id:'r45',name:'Diego André Acosta García',grade:'first',group:'1-1'},
-  {id:'r46',name:'Estefan Damian Pérez Cruz',grade:'first',group:'1-1'},
-  {id:'r47',name:'Fernando José Cortés Esquilín',grade:'first',group:'1-1'},
-  {id:'r48',name:'Gina Kaelis Gutierrez Borrero',grade:'first',group:'1-1'},
-  {id:'r49',name:'Ivyannise Zoé Ayala Estela',grade:'first',group:'1-1'},
-  {id:'r50',name:'Joenid Zoé Crispín Morales',grade:'first',group:'1-1'},
-  {id:'r51',name:'Julián Gael Medina Ortiz',grade:'first',group:'1-1'},
-  {id:'r52',name:'Kyan Alexis Padilla Alemán',grade:'first',group:'1-1'},
+  {id:'n300',name:'África Ivelle Acevedo Aponte',grade:'kinder',group:'K-1'},
+  {id:'n301',name:'Valeria Andrea Carmona Cedano',grade:'kinder',group:'K-1'},
+  {id:'n302',name:'Chrisielis Jasmine Colón Colón',grade:'kinder',group:'K-1'},
+  {id:'n303',name:'Bryan Louis Cortés Grajales',grade:'kinder',group:'K-1'},
+  {id:'n304',name:'Damian Khalil Couso Cabrera',grade:'kinder',group:'K-1'},
+  {id:'n305',name:'Eliarys Naed Delgado Mojica',grade:'kinder',group:'K-1'},
+  {id:'n306',name:'Rose Ahynara De La Cruz Ortiz',grade:'kinder',group:'K-1'},
+  {id:'n307',name:'Eizer Yaomar Espada Márquez',grade:'kinder',group:'K-1'},
+  {id:'n308',name:'Jesley Marie García Dilone',grade:'kinder',group:'K-1'},
+  {id:'n309',name:'Luka Sahir Hidalgo Franco',grade:'kinder',group:'K-1'},
+  {id:'n310',name:'Sebastián Alejandro Jiménez Sánchez',grade:'kinder',group:'K-1'},
+  {id:'n311',name:'Nohelianys Kaia Morales García',grade:'kinder',group:'K-1'},
+  {id:'n312',name:'Dahiana Dalila Morales Pérez',grade:'kinder',group:'K-1'},
+  {id:'n313',name:'Evans Alexander Otero Cortijo',grade:'kinder',group:'K-1'},
+  {id:'n314',name:'Damian Marti Otero De Jesús',grade:'kinder',group:'K-1'},
+  {id:'n315',name:'Gabriela María Pérez Tripari',grade:'kinder',group:'K-1'},
+  {id:'n316',name:'Kiany Yeniely Pizarro Verdejo',grade:'kinder',group:'K-1'},
+  {id:'n317',name:'Anya Malik Santiago Santiago',grade:'kinder',group:'K-1'},
+  {id:'n318',name:'Liam Darnell Silva Padilla',grade:'kinder',group:'K-1'},
+  {id:'n319',name:'Sair David Urbáez Pérez',grade:'kinder',group:'K-1'},
+  {id:'n320',name:'Urayoán Álvarez Reyes',grade:'kinder',group:'K-2'},
+  {id:'n321',name:'Milena Luna Bermúdez Hernández',grade:'kinder',group:'K-2'},
+  {id:'n322',name:'Logan Lee Birriel Lebrón',grade:'kinder',group:'K-2'},
+  {id:'n323',name:'Iñaki Nicolás Carattini Santiago',grade:'kinder',group:'K-2'},
+  {id:'n324',name:'Jorielys Kamille Castro Castro',grade:'kinder',group:'K-2'},
+  {id:'n325',name:'Ainara Lee De León Figueroa',grade:'kinder',group:'K-2'},
+  {id:'n326',name:'Mateo González Rivera',grade:'kinder',group:'K-2'},
+  {id:'n327',name:'Jana Jael Hernández Márquez',grade:'kinder',group:'K-2'},
+  {id:'n328',name:'Antonella Isales Clemente',grade:'kinder',group:'K-2'},
+  {id:'n329',name:'Jedsuan Obed Miranda',grade:'kinder',group:'K-2'},
+  {id:'n330',name:'Gian Lucas Morales Andrades',grade:'kinder',group:'K-2'},
+  {id:'n331',name:'Sara Lissette Núñez Cepeda',grade:'kinder',group:'K-2'},
+  {id:'n332',name:'Emma Kelaia Pérez Pérez',grade:'kinder',group:'K-2'},
+  {id:'n333',name:'Erick Gael Rivera Abreu',grade:'kinder',group:'K-2'},
+  {id:'n334',name:'Mateo Rivera Meléndez',grade:'kinder',group:'K-2'},
+  {id:'n335',name:'Joeydis Sophia Rivera Rosario',grade:'kinder',group:'K-2'},
+  {id:'n336',name:'Kylieh Mar Rodríguez Gavillán',grade:'kinder',group:'K-2'},
+  {id:'n337',name:'Leniel Rodríguez Velázquez',grade:'kinder',group:'K-2'},
+  {id:'n338',name:'Bryaneliz Crystal Tejada Pereira',grade:'kinder',group:'K-2'},
+  {id:'n339',name:'Lucas Gaell Torres Zacarías',grade:'kinder',group:'K-2'},
+  {id:'r39',name:'Yaveth Giomar Adorno Guevara',grade:'first',group:'1-1'},
+  {id:'r19',name:'Yeilianis Michelle Ayala Estela',grade:'first',group:'1-1'},
+  {id:'r22',name:'Allison Isell Calderón Rodríguez',grade:'first',group:'1-1'},
+  {id:'r25',name:'Erick Javier Camacho Colón',grade:'first',group:'1-1'},
+  {id:'r2',name:'Derick Iván Carmona Marrero',grade:'first',group:'1-1'},
+  {id:'r13',name:'Liam Gabriel Catalá Jiménez',grade:'first',group:'1-1'},
+  {id:'r10',name:'Kaiden Jahir Delgado Acevedo',grade:'first',group:'1-1'},
+  {id:'r27',name:'Jennyeliz Espada Márquez',grade:'first',group:'1-1'},
+  {id:'r3',name:'Diheirys Aliz Flores',grade:'first',group:'1-1'},
+  {id:'r16',name:'Ocean Joel Hernández Adorno',grade:'first',group:'1-1'},
+  {id:'r31',name:'Lady Ainarah López Barreto',grade:'first',group:'1-1'},
+  {id:'r8',name:'Jeylianiz Juliette Márquez Villanueva',grade:'first',group:'1-1'},
+  {id:'r33',name:'Lucas Gael Meléndez Oyola',grade:'first',group:'1-1'},
+  {id:'r38',name:'Xandel Gael Pizarro Miranda',grade:'first',group:'1-1'},
+  {id:'r14',name:'Mateo Ríos Miranda',grade:'first',group:'1-1'},
   {id:'r53',name:'Mia Kaylee Rodríguez Martes',grade:'first',group:'1-1'},
-  {id:'r54',name:'Milán Andrés Graupera Zayas',grade:'first',group:'1-1'},
-  {id:'r55',name:'Neylanis Zoeeth Negrón Castro',grade:'first',group:'1-1'},
-  {id:'r56',name:'Owen Vázquez Ramírez',grade:'first',group:'1-1'},
-  {id:'r57',name:'Penélope Arlett Rosario Ocasio',grade:'first',group:'1-1'},
-  {id:'r58',name:'Reyden Zaid Bussher Moreno',grade:'first',group:'1-1'},
-  {id:'r59',name:'Sherliannys Zoé De Jesús Flores',grade:'first',group:'1-1'},
-  {id:'r60',name:'Vicnielys Antonella Esquilín Fonseca',grade:'first',group:'1-1'},
-  {id:'r61',name:'Adeylianys Zoé Ortiz Ayala',grade:'first',group:'1-2'},
-  {id:'r62',name:'Alahia Itzel Díaz Torres',grade:'first',group:'1-2'},
-  {id:'r63',name:'Amaya Sairet Salgado Velázquez',grade:'first',group:'1-2'},
-  {id:'r64',name:'Bledmadys Zoé Cortés Matos',grade:'first',group:'1-2'},
-  {id:'r65',name:'Dael Jerome Correa Pérez',grade:'first',group:'1-2'},
-  {id:'r66',name:'Derek Javier Alexander Nazario De La Cruz',grade:'first',group:'1-2'},
-  {id:'r67',name:'Emeline Clarice Sierra',grade:'first',group:'1-2'},
-  {id:'r68',name:'Gael Fabian Torres Torres',grade:'first',group:'1-2'},
-  {id:'r69',name:'Isaiah Jantzen Carrasquillo Ocasio',grade:'first',group:'1-2'},
-  {id:'r70',name:'Jan Alexander Pastrana Rodríguez',grade:'first',group:'1-2'},
-  {id:'r71',name:'Jeilian Alizzon Alicea Concepción',grade:'first',group:'1-2'},
-  {id:'r72',name:'Joséft Ahmed Sánchez Martínez',grade:'first',group:'1-2'},
-  {id:'r73',name:'Kaylah Amila Crespo Vázquez',grade:'first',group:'1-2'},
-  {id:'r74',name:'Kyle Ethan Watts De León',grade:'first',group:'1-2'},
-  {id:'r75',name:'Liam Joel Núñez Santa',grade:'first',group:'1-2'},
-  {id:'r76',name:'Mikaela Victoria Sánchez González',grade:'first',group:'1-2'},
-  {id:'r77',name:'Sergio Bekia Carrión Ortiz',grade:'first',group:'1-2'},
-  {id:'r78',name:'Victoria Atlanna Polanco Laureano',grade:'first',group:'1-2'},
-  {id:'r79',name:'Yahimeris Zoé Osorio Santos',grade:'first',group:'1-2'},
+  {id:'r7',name:'Janeiro Santos Castillo',grade:'first',group:'1-1'},
+  {id:'r20',name:'Zoriannys Nicole Serrano Rodríguez',grade:'first',group:'1-1'},
+  {id:'r37',name:'Xaileen Torres Díaz',grade:'first',group:'1-1'},
+  {id:'r74',name:'Kyle Ethan Watts De León',grade:'first',group:'1-1'},
+  {id:'r21',name:'Adrián Mateo Andrades',grade:'first',group:'1-2'},
+  {id:'r11',name:'Kevin Omany Castro Meléndez',grade:'first',group:'1-2'},
+  {id:'r6',name:'Grace Gianni Díaz Mercado',grade:'first',group:'1-2'},
+  {id:'r29',name:'Jhanielyz Zoé Díaz Santiago',grade:'first',group:'1-2'},
+  {id:'r18',name:'Vicnier Antoniel Esquilín Fonseca',grade:'first',group:'1-2'},
+  {id:'r5',name:'Gema Amaia Garay Ruiz',grade:'first',group:'1-2'},
+  {id:'r28',name:'Jeremías Zaid Hernández Márquez',grade:'first',group:'1-2'},
+  {id:'r1',name:'Alexyam Jerome Lefebre Rodríguez',grade:'first',group:'1-2'},
+  {id:'n340',name:'Gretchen Liriano Candelario',grade:'first',group:'1-2'},
+  {id:'r9',name:'John Paul Lisboa Rosado',grade:'first',group:'1-2'},
+  {id:'r40',name:'Zuriamdhalee López Méndez',grade:'first',group:'1-2'},
+  {id:'r23',name:'Ángel Yunior Lorenzo Barry',grade:'first',group:'1-2'},
   {id:'r80',name:'Yarianna Diangie Pagán Pagán',grade:'first',group:'1-2'},
-  {id:'r81',name:'Alan Josué Marrero Álvarez',grade:'second',group:'2-1'},
-  {id:'r82',name:'Aliah Samara Rodríguez Ortiz',grade:'second',group:'2-1'},
-  {id:'r83',name:'Amaia Zoé Alberto Burgos',grade:'second',group:'2-1'},
-  {id:'r84',name:'Amy Khloe Pizarro Santini',grade:'second',group:'2-1'},
-  {id:'r85',name:'Aubriel Jacob Villanueva Núñez',grade:'second',group:'2-1'},
-  {id:'r86',name:'Carlos Joel Morales Berrocales',grade:'second',group:'2-1'},
-  {id:'r87',name:'Chrisleanis Rodríguez Cruz',grade:'second',group:'2-1'},
-  {id:'r88',name:'Deborah Soler Grajales',grade:'second',group:'2-1'},
-  {id:'r89',name:'Dylan Amadeus Colón Morales',grade:'second',group:'2-1'},
-  {id:'r90',name:'Fabián Samir Negrón Cáez',grade:'second',group:'2-1'},
-  {id:'r91',name:'Ian Caleb Liz Santa',grade:'second',group:'2-1'},
-  {id:'r92',name:'Isabelle Beatrice Velázquez Batista',grade:'second',group:'2-1'},
-  {id:'r93',name:'Keennan Ledif Sánchez Morales',grade:'second',group:'2-1'},
-  {id:'r94',name:'Naybeth Sophia Cortés Esquilín',grade:'second',group:'2-1'},
-  {id:'r95',name:'Rafael Mikael Aponte Carrasco',grade:'second',group:'2-1'},
-  {id:'r96',name:'Silvia Lissette Núñez Cepeda',grade:'second',group:'2-1'},
-  {id:'r97',name:'Vanellys Zoé Negrón Castro',grade:'second',group:'2-1'},
-  {id:'r98',name:'Yamil Manuel Vargas Miranda',grade:'second',group:'2-1'},
-  {id:'r99',name:'Yotham Khalim Quezada Willmore',grade:'second',group:'2-1'},
-  {id:'r100',name:'Zarek Pérez Balado',grade:'second',group:'2-1'},
-  {id:'r101',name:'Aidalee Colón Tirado',grade:'second',group:'2-2'},
-  {id:'r102',name:'Ainoah Lemysh Báez Peñaloza',grade:'second',group:'2-2'},
-  {id:'r103',name:'Alysha Antonella Portorreal',grade:'second',group:'2-2'},
-  {id:'r104',name:'Amalia Nicole Delgado Salvador',grade:'second',group:'2-2'},
-  {id:'r105',name:'Brian Joniel Arredondo De La Cruz',grade:'second',group:'2-2'},
-  {id:'r106',name:'Chrisyarielis Saian Torres Díaz',grade:'second',group:'2-2'},
-  {id:'r107',name:'Dailenid Sophia Disla Negrón',grade:'second',group:'2-2'},
-  {id:'r108',name:'Darío Andrés Falú Pearson',grade:'second',group:'2-2'},
-  {id:'r109',name:'Elian Jared Molina Santana',grade:'second',group:'2-2'},
-  {id:'r110',name:'Emily Tayme Viera García',grade:'second',group:'2-2'},
-  {id:'r111',name:'Ian Amir Castro Acero',grade:'second',group:'2-2'},
-  {id:'r112',name:"Jakciel Osvaldo Merced Raffol's",grade:'second',group:'2-2'},
-  {id:'r113',name:'Kenahia Michelle Fermaintt Ayala',grade:'second',group:'2-2'},
-  {id:'r114',name:'Khail Elian Guzmán Ríos',grade:'second',group:'2-2'},
-  {id:'r115',name:'Matías Sosa Rosario',grade:'second',group:'2-2'},
-  {id:'r116',name:'Naithans Anthony Reyes Rivera',grade:'second',group:'2-2'},
-  {id:'r117',name:'Nellyam Jasef López',grade:'second',group:'2-2'},
-  {id:'r118',name:'Odarit Liz Castro Tirado',grade:'second',group:'2-2'},
-  {id:'r119',name:'Sofía Angeli Suárez Colón',grade:'second',group:'2-2'},
-  {id:'r120',name:'Yelian Tirado Viera',grade:'second',group:'2-2'},
-  {id:'r121',name:'Alexa Sophia Cepeda Luna',grade:'third',group:'3-1'},
-  {id:'r122',name:'Alexandrielys Arroyo Meléndez',grade:'third',group:'3-1'},
-  {id:'r123',name:'Alondra Zoé Domenech Rolón',grade:'third',group:'3-1'},
-  {id:'r124',name:'Amelia Figueroa Báez',grade:'third',group:'3-1'},
-  {id:'r125',name:'Asiel Yael Velázquez Ruiz',grade:'third',group:'3-1'},
-  {id:'r126',name:'Franliek Nebdiel Irizarry Laguna',grade:'third',group:'3-1'},
-  {id:'r127',name:'Ginalee Rodríguez Calixto',grade:'third',group:'3-1'},
-  {id:'r128',name:'Habrianys Irizarry Mendoza',grade:'third',group:'3-1'},
-  {id:'r129',name:'Ian Ricardo Ríos Miranda',grade:'third',group:'3-1'},
-  {id:'r130',name:'Itzabella Christymary Monge Colón',grade:'third',group:'3-1'},
-  {id:'r131',name:'Juan Carlos Valdovinos Maeso',grade:'third',group:'3-1'},
-  {id:'r132',name:'Kael Alfonzo Pérez Balado',grade:'third',group:'3-1'},
-  {id:'r133',name:'Kairielys Yeiline Castro Castro',grade:'third',group:'3-1'},
-  {id:'r134',name:'Katelyn Nicole Galindez Febres',grade:'third',group:'3-1'},
-  {id:'r135',name:'Liantoniel Jireb Martínez López',grade:'third',group:'3-1'},
-  {id:'r136',name:'Mateo André Pagán Medina',grade:'third',group:'3-1'},
-  {id:'r137',name:'Nahiara Sofía Torres Vélez',grade:'third',group:'3-1'},
-  {id:'r138',name:'Valentina Grace Taronji Saúl',grade:'third',group:'3-1'},
-  {id:'r139',name:'Yamileirys Aliz Flores',grade:'third',group:'3-1'},
-  {id:'r140',name:'Yolian Tirado Viera',grade:'third',group:'3-1'},
-  {id:'r141',name:'Adriana Liz Ayala Benítez',grade:'third',group:'3-2'},
-  {id:'r142',name:'Aleannys Isabel Manzano Reyes',grade:'third',group:'3-2'},
-  {id:'r143',name:'Analía Ailed De Jesús Mercado',grade:'third',group:'3-2'},
-  {id:'r144',name:'Brianna Isabelle Aponte Sánchez',grade:'third',group:'3-2'},
-  {id:'r145',name:'Caelii Victoria Torres Reyes',grade:'third',group:'3-2'},
-  {id:'r146',name:'Darielis Enid Núñez Velázquez',grade:'third',group:'3-2'},
-  {id:'r147',name:'Elizabeth Figueroa Báez',grade:'third',group:'3-2'},
-  {id:'r148',name:'Gemaylee Aimmeth Casañas Rodríguez',grade:'third',group:'3-2'},
-  {id:'r149',name:'Helen Sophia Soler Grajales',grade:'third',group:'3-2'},
-  {id:'r150',name:'Ian Jenniel Carrasquillo Pérez',grade:'third',group:'3-2'},
-  {id:'r151',name:'Jade Mickaela Peñaloza Figueroa',grade:'third',group:'3-2'},
-  {id:'r152',name:'Keyla Isabelle Pastrana Rodríguez',grade:'third',group:'3-2'},
-  {id:'r153',name:'Matthew Heredia Taveras',grade:'third',group:'3-2'},
-  {id:'r154',name:'Micael Abisaí De Jesús Alemán',grade:'third',group:'3-2'},
-  {id:'r155',name:'Naiara Keylee Couso Cabrera',grade:'third',group:'3-2'},
-  {id:'r156',name:'Nathanael Osorio Rivera',grade:'third',group:'3-2'},
-  {id:'r157',name:'Omar Enrique García Francisquini',grade:'third',group:'3-2'},
-  {id:'r158',name:'Tiana Marie Acevedo López',grade:'third',group:'3-2'},
-  {id:'r159',name:'Uma Juliette Rivas Oliver',grade:'third',group:'3-2'},
-  {id:'r160',name:'Yeilizbeth Zoé Torres',grade:'third',group:'3-2'},
+  {id:'r12',name:'Kiomary Yeriany Pizarro Verdejo',grade:'first',group:'1-2'},
+  {id:'r15',name:'Noah Kail Rosado Rivera',grade:'first',group:'1-2'},
+  {id:'r32',name:'Leanna Isabel Sánchez Gómez',grade:'first',group:'1-2'},
+  {id:'r30',name:'Jhosayan Joel Segarra Falcón',grade:'first',group:'1-2'},
+  {id:'r24',name:'Dashiel José Tirado González',grade:'first',group:'1-2'},
+  {id:'r36',name:'Ryan Daniel Torres Cisnero',grade:'first',group:'1-2'},
+  {id:'n341',name:'Nayla Marie Villalona Colón',grade:'first',group:'1-2'},
+  {id:'r49',name:'Ivyannise Zoé Ayala Estela',grade:'second',group:'2-1'},
+  {id:'r77',name:'Sergio Bekia Carrión Ortiz',grade:'second',group:'2-1'},
+  {id:'r65',name:'Dael Jerome Correa Pérez',grade:'second',group:'2-1'},
+  {id:'r47',name:'Fernando José Cortés Esquilín',grade:'second',group:'2-1'},
+  {id:'r64',name:'Bledmadys Zoé Cortés Matos',grade:'second',group:'2-1'},
+  {id:'r59',name:'Sherliannys Zoé De Jesús Flores',grade:'second',group:'2-1'},
+  {id:'r41',name:'Ahilany Sophia Garrafa Batista',grade:'second',group:'2-1'},
+  {id:'n342',name:'Kattaleia González Hernández',grade:'second',group:'2-1'},
+  {id:'r48',name:'Gina Kaelis Gutierrez Borrero',grade:'second',group:'2-1'},
+  {id:'n343',name:'Kahia Dalinesh Hernández Acevedo',grade:'second',group:'2-1'},
+  {id:'n344',name:'Nariamyelee López Méndez',grade:'second',group:'2-1'},
+  {id:'r44',name:'Deyluanis Michelle Márquez Villanueva',grade:'second',group:'2-1'},
+  {id:'r51',name:'Julian Gael Medina Ortiz',grade:'second',group:'2-1'},
+  {id:'r79',name:'Yahimeris Zoé Osorio Santos',grade:'second',group:'2-1'},
+  {id:'r52',name:'Kyan Alexis Padilla Alemán',grade:'second',group:'2-1'},
+  {id:'r70',name:'Jan Alexander Pastrana Rodríguez',grade:'second',group:'2-1'},
+  {id:'r46',name:'Estefan Damian Pérez Cruz',grade:'second',group:'2-1'},
+  {id:'r42',name:'Ayla Amaia Pizarro Santini',grade:'second',group:'2-1'},
+  {id:'r72',name:'Joseft Ahmed Sánchez Martínez',grade:'second',group:'2-1'},
+  {id:'r56',name:'Owen Vázquez Ramírez',grade:'second',group:'2-1'},
+  {id:'r45',name:'Diego André Acosta García',grade:'second',group:'2-2'},
+  {id:'r71',name:'Jeilian Alizzon Alicea Concepción',grade:'second',group:'2-2'},
+  {id:'r69',name:'Isaiah Jantzen Carrasquillo Ocasio',grade:'second',group:'2-2'},
+  {id:'r73',name:'Kaylah Amila Crespo Vázquez',grade:'second',group:'2-2'},
+  {id:'r50',name:'Joenid Zoé Crispín Morales',grade:'second',group:'2-2'},
+  {id:'r34',name:'Mateo José De Jesús Hernández',grade:'second',group:'2-2'},
+  {id:'r60',name:'Vicnielys Antonella Esquilín Fonseca',grade:'second',group:'2-2'},
+  {id:'r54',name:'Milán Andrés Graupera Zayas',grade:'second',group:'2-2'},
+  {id:'n345',name:'Andrea Isabel Mercado Rivera',grade:'second',group:'2-2'},
+  {id:'r66',name:'Derek Javier Alexander Nazario De La Cruz',grade:'second',group:'2-2'},
+  {id:'r75',name:'Liam Joel Núñez Santa',grade:'second',group:'2-2'},
+  {id:'n346',name:'Jacob Khaleb Ortega Ortiz',grade:'second',group:'2-2'},
+  {id:'r61',name:'Adeylianys Zoé Ortiz Ayala',grade:'second',group:'2-2'},
+  {id:'r78',name:'Victoria Atlanna Polanco Laureano',grade:'second',group:'2-2'},
+  {id:'n347',name:'Nahiara Amyliz Rodríguez Otero',grade:'second',group:'2-2'},
+  {id:'r57',name:'Penélope Arlett Rosario Ocasio',grade:'second',group:'2-2'},
+  {id:'r63',name:'Amaya Sairet Salgado Velázquez',grade:'second',group:'2-2'},
+  {id:'r43',name:'Catalina Kristal Serrano Acevedo',grade:'second',group:'2-2'},
+  {id:'r67',name:'Emeline Clarice Sierra',grade:'second',group:'2-2'},
+  {id:'r68',name:'Gael Fabian Torres Torres',grade:'second',group:'2-2'},
+  {id:'r102',name:'Ainoah Lemysh Báez Peñaloza',grade:'third',group:'3-1'},
+  {id:'r118',name:'Odarit Liz Castro Tirado',grade:'third',group:'3-1'},
+  {id:'r89',name:'Dylan Amadeus Colón Morales',grade:'third',group:'3-1'},
+  {id:'r94',name:'Naybeth Sophia Cortés Esquilín',grade:'third',group:'3-1'},
+  {id:'r107',name:'Dailenid Sophia Disla Negrón',grade:'third',group:'3-1'},
+  {id:'r108',name:'Darío Andrés Falú Pearson',grade:'third',group:'3-1'},
+  {id:'r117',name:'Nellyam Jasef López',grade:'third',group:'3-1'},
+  {id:'r81',name:'Alan Josué Marrero Álvarez',grade:'third',group:'3-1'},
+  {id:'r112',name:"Jakciel Osvaldo Merced Raffol's",grade:'third',group:'3-1'},
+  {id:'r100',name:'Zarek Pérez Balado',grade:'third',group:'3-1'},
+  {id:'r84',name:'Amy Khloe Pizarro Santini',grade:'third',group:'3-1'},
+  {id:'n348',name:'George Emil Ramírez López',grade:'third',group:'3-1'},
+  {id:'r88',name:'Deborah Soler Grajales',grade:'third',group:'3-1'},
+  {id:'r115',name:'Matías Sosa Rosario',grade:'third',group:'3-1'},
+  {id:'r119',name:'Sofía Angeli Suárez Colón',grade:'third',group:'3-1'},
+  {id:'r120',name:'Yelian Tirado Viera',grade:'third',group:'3-1'},
+  {id:'r106',name:'Chrisyarielis Saian Torres Díaz',grade:'third',group:'3-1'},
+  {id:'r98',name:'Yamil Manuel Vargas Miranda',grade:'third',group:'3-1'},
+  {id:'r92',name:'Isabelle Beatrice Velázquez Batista',grade:'third',group:'3-1'},
+  {id:'r110',name:'Emily Tayme Viera García',grade:'third',group:'3-1'},
+  {id:'r83',name:'Amaia Zoé Alberto Burgos',grade:'third',group:'3-2'},
+  {id:'r95',name:'Rafael Mikael Aponte Carrasco',grade:'third',group:'3-2'},
+  {id:'r105',name:'Brian Joniel Arredondo De La Cruz',grade:'third',group:'3-2'},
+  {id:'r111',name:'Ian Amir Castro Acero',grade:'third',group:'3-2'},
+  {id:'r101',name:'Aidalee Colón Tirado',grade:'third',group:'3-2'},
+  {id:'r104',name:'Amalia Nicole Delgado Salvador',grade:'third',group:'3-2'},
+  {id:'r113',name:'Kenahia Michelle Fermaintt Ayala',grade:'third',group:'3-2'},
+  {id:'n349',name:'Uri Asad Fermín García',grade:'third',group:'3-2'},
+  {id:'r114',name:'Khail Elian Guzmán Ríos',grade:'third',group:'3-2'},
+  {id:'r91',name:'Ian Caleb Liz Santa',grade:'third',group:'3-2'},
+  {id:'r86',name:'Carlos Joel Morales Berrocales',grade:'third',group:'3-2'},
+  {id:'r90',name:'Fabián Samir Negrón Cáez',grade:'third',group:'3-2'},
+  {id:'r96',name:'Silvia Lissette Núñez Cepeda',grade:'third',group:'3-2'},
+  {id:'r103',name:'Alysha Antonella Portorreal',grade:'third',group:'3-2'},
+  {id:'r99',name:'Yotham Khalim Quezada Willmore',grade:'third',group:'3-2'},
+  {id:'r116',name:'Naithans Anthony Reyes Rivera',grade:'third',group:'3-2'},
+  {id:'r87',name:'Chrisleanis Rodríguez Cruz',grade:'third',group:'3-2'},
+  {id:'r82',name:'Aliah Samara Rodríguez Ortiz',grade:'third',group:'3-2'},
+  {id:'r93',name:'Keennan Ledif Sánchez Morales',grade:'third',group:'3-2'},
+  {id:'r85',name:'Aubriel Jacob Villanueva Núñez',grade:'third',group:'3-2'}
 ];
 const DEF_BOOKS=[
   {id:'lb1',title:'¡¿Que el gallo hizo cómo?!',author:'',code:''},
@@ -1360,6 +1378,10 @@ try{
     const p=JSON.parse(sv);
     S.loans=p.loans||[];
     S.students=p.students||[...DEF_STU];
+    // Always use DEF_STU as base — update existing students, add manually-added ones
+    const defStuIds=new Set(DEF_STU.map(s=>s.id));
+    const manualStudents=(p.students||[]).filter(s=>!defStuIds.has(s.id));
+    S.students=[...DEF_STU,...manualStudents];
     S.loanDays=p.loanDays||3;
     // Always start with full DEF_BOOKS, then add any manually-added books not in default list
     const defIds=new Set(DEF_BOOKS.map(b=>b.id));
@@ -1395,18 +1417,22 @@ function updateStats(){
 }
 
 // ── LOAN ──
-function startLoan(){showView('v-loan');renderLoan()}
+function startLoan(){S.loanStep=0;S.regType=null;S.selRegistrar=null;showView('v-loan');renderLoan()}
 
 function renderLoan(){
   const el=document.getElementById('loan-body');
-  // Don't show step counter on success screen
   if(S.loanStep===5){
     document.getElementById('loan-sub').textContent='';
     el.innerHTML=renderLoanSuccess();
     return;
   }
+  if(S.loanStep===0){
+    document.getElementById('loan-sub').textContent='¿Quién registra?';
+    el.innerHTML=renderRegistrarStep();
+    return;
+  }
   document.getElementById('loan-sub').textContent=`Paso ${S.loanStep} de 4`;
-  const stps=`<div class="steps">${['Grado','Estudiante','Libro','Confirmar'].map((l,i)=>{
+  const stps=`<div class="steps">${['Grupo','Estudiante','Libro','Confirmar'].map((l,i)=>{
     const n=i+1,cls=n<S.loanStep?'dn':n===S.loanStep?'on':'';
     return `${i>0?`<div class="sbar ${n<=S.loanStep?'dn':''}"></div>`:''}<div class="step ${cls}"><div class="sdot">${n<S.loanStep?'✓':n}</div><div class="slbl">${l}</div></div>`;
   }).join('')}</div>`;
@@ -1414,6 +1440,63 @@ function renderLoan(){
   else if(S.loanStep===2) el.innerHTML=stps+renderStudentStep();
   else if(S.loanStep===3) el.innerHTML=stps+renderBookStep();
   else if(S.loanStep===4) el.innerHTML=stps+renderConfirmStep();
+}
+
+function renderRegistrarStep(){
+  const types=[
+    {id:'teacher',label:'Maestra/o',emoji:'👩‍🏫',desc:'Personal docente'},
+    {id:'rep',label:'Representante',emoji:'📚',desc:'Representante de biblioteca'},
+    {id:'student',label:'Estudiante',emoji:'🎒',desc:'Estudiante de K-3'},
+  ];
+  let chipsHtml='';
+  if(S.regType==='teacher'){
+    chipsHtml=`<div style="margin-top:16px"><div style="font-size:0.78rem;color:var(--mu);margin-bottom:10px">Selecciona tu nombre:</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      ${TEACHERS.map(t=>`<button onclick="selectRegistrar('${t.id}','${t.name.replace(/'/g,"\'")}','teacher')"
+        style="padding:9px 16px;border-radius:20px;border:1.5px solid ${S.selRegistrar?.id===t.id?'var(--or)':'var(--wm)'};
+        background:${S.selRegistrar?.id===t.id?'var(--or)':'white'};font-size:0.82rem;font-family:DM Sans,sans-serif;
+        cursor:pointer;font-weight:${S.selRegistrar?.id===t.id?'600':'400'}">${t.name}</button>`).join('')}
+    </div></div>`;
+  } else if(S.regType==='rep'){
+    const reps=S.reps||[];
+    chipsHtml=`<div style="margin-top:16px"><div style="font-size:0.78rem;color:var(--mu);margin-bottom:10px">Selecciona tu nombre:</div>
+    ${reps.length?`<div style="display:flex;flex-wrap:wrap;gap:8px">
+      ${reps.map(r=>`<button onclick="selectRegistrar('${r.id}','${r.name.replace(/'/g,"\'")}','rep')"
+        style="padding:9px 16px;border-radius:20px;border:1.5px solid ${S.selRegistrar?.id===r.id?'var(--or)':'var(--wm)'};
+        background:${S.selRegistrar?.id===r.id?'var(--or)':'white'};font-size:0.82rem;font-family:DM Sans,sans-serif;cursor:pointer">${r.name}</button>`).join('')}
+    </div>` : '<div style="color:var(--mu);font-size:0.82rem;padding:12px;background:var(--wm);border-radius:10px">Los representantes se configuran en ⚙ Admin</div>'}
+    </div>`;
+  }
+  return `<div class="card">
+    <div class="ct">¿Quién registra?</div>
+    <div class="cs">Selecciona el tipo y luego tu nombre</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${types.map(t=>`<button onclick="selectRegType('${t.id}')"
+        style="border:2px solid ${S.regType===t.id?'var(--or)':'var(--wm)'};border-radius:14px;padding:14px 18px;
+        display:flex;align-items:center;gap:14px;cursor:pointer;background:${S.regType===t.id?'var(--or-lt)':'white'};
+        text-align:left;width:100%;transition:all 0.15s">
+        <span style="font-size:1.5rem">${t.emoji}</span>
+        <div><div style="font-weight:600;font-size:0.92rem">${t.label}</div>
+        <div style="font-size:0.74rem;color:var(--mu)">${t.desc}</div></div>
+      </button>`).join('')}
+    </div>
+    ${chipsHtml}
+  </div>
+  <button class="btnp" onclick="${S.regType==='student'?'goLS(1)':'goLS(1)'}"
+    ${!S.selRegistrar&&S.regType!=='student'?'disabled':''}>
+    ${S.regType==='student'?'Continuar →':'Continuar →'}
+  </button>`;
+}
+
+function selectRegType(type){
+  S.regType=type;S.selRegistrar=null;
+  if(type==='student') S.selRegistrar={id:'student',name:'Estudiante',role:'student'};
+  renderLoan();
+}
+
+function selectRegistrar(id,name,role){
+  S.selRegistrar={id,name,role};
+  renderLoan();
 }
 
 function renderGradeStep(){
@@ -1474,7 +1557,7 @@ function renderBookStep(){
     <div class="barcode-field">
       <div class="barcode-ico">🔫</div>
       <input type="text" id="barcode-input" inputmode="numeric"
-        placeholder="Escribe o escanea el código — filtra en tiempo real…"
+        placeholder="Pasa el escáner o escribe el código…"
         oninput="onBarcodeInput(this.value)"
         autocomplete="off" autocorrect="off" spellcheck="false"/>
     </div>
@@ -1642,29 +1725,23 @@ function confirmReturn(id){
 }
 
 // ── BARCODE INPUT (loan) ──
+let barcodeTimer=null;
 function onBarcodeInput(val){
-  const code=val.trim();
-  const badge=document.getElementById('bk-badge');
-  if(badge) badge.className='sbadge';
-
-  // Filter book list by code in real time
-  const fl=code ? S.books.filter(b=>b.code&&b.code.includes(code)) : S.books;
-  const el=document.getElementById('book-list');
-  if(el) el.innerHTML=renderBookRows(fl);
-
-  // If exact match, select automatically without re-rendering
-  const exact=S.books.find(b=>b.code===code);
-  if(exact){
-    S.selBook=exact;
-    // Highlight in list
-    document.querySelectorAll('#book-list .lrow').forEach(r=>r.classList.remove('sel'));
-    const rows=document.querySelectorAll('#book-list .lrow');
-    if(rows.length===1) rows[0].classList.add('sel');
-    // Enable continue button
-    const btn=document.getElementById('bk-cont');
-    if(btn) btn.removeAttribute('disabled');
-    if(badge){badge.className='sbadge ok';badge.textContent='✓ '+exact.title;}
-  }
+  clearTimeout(barcodeTimer);
+  if(!val.trim()) return;
+  // Barcode scanners send all digits + Enter very fast (~50ms total)
+  // We try to match immediately; also set a short timer as fallback
+  barcodeTimer=setTimeout(()=>{
+    const code=val.trim().replace(/[\r\n]/g,'');
+    const book=S.books.find(b=>b.code===code);
+    const badge=document.getElementById('bk-badge');
+    if(book){
+      pickBook(book);
+      if(badge){badge.className='sbadge ok';badge.textContent='✓ Libro encontrado: '+book.title}
+    } else if(code.length>=4){
+      if(badge){badge.className='sbadge err';badge.textContent='Código no encontrado: '+code}
+    }
+  },120);
 }
 
 // ── BARCODE INPUT (return) ──
@@ -1688,6 +1765,31 @@ function onRetBarcodeInput(val){
 }
 
 // ── RECORDS ──
+
+function renderMonthlyStats(){
+  const months=['Agosto','Septiembre','Octubre','Noviembre','Diciembre','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio'];
+  const counts={};
+  S.loans.forEach(l=>{
+    const d=new Date(l.loanDate);
+    const key=`${months[d.getMonth()]} ${d.getFullYear()}`;
+    counts[key]=(counts[key]||0)+1;
+  });
+  const entries=Object.entries(counts);
+  if(!entries.length) return '';
+  const max=Math.max(...entries.map(([,v])=>v));
+  return `<div class="card" style="margin-bottom:14px">
+    <div class="ct" style="margin-bottom:14px">📅 Libros por mes</div>
+    ${entries.map(([month,count])=>`
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <div style="font-size:0.8rem;color:var(--mu);min-width:110px">${month}</div>
+        <div style="flex:1;background:var(--wm);border-radius:20px;height:10px;overflow:hidden">
+          <div style="width:${Math.round(count/max*100)}%;background:var(--or);height:100%;border-radius:20px;transition:width 0.4s"></div>
+        </div>
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:0.92rem;color:var(--or);min-width:24px;text-align:right">${count}</div>
+      </div>`).join('')}
+  </div>`;
+}
+
 function deleteLoan(id){
   if(!confirm('¿Borrar esta entrada del registro? Esta acción no se puede deshacer.')) return;
   S.loans=S.loans.filter(l=>l.id!==id);
@@ -1699,7 +1801,7 @@ function renderRecords(){
   else if(S.retFilter==='ov') loans=loans.filter(l=>!l.returned&&isOv(l.dueDate));
   else if(S.retFilter==='ret') loans=loans.filter(l=>l.returned);
   const el=document.getElementById('rec-body');
-  el.innerHTML=`<div class="rfil">
+  el.innerHTML=renderMonthlyStats()+`<div class="rfil">
     ${[['all','Todos'],['act','Activos'],['ov','Vencidos'],['ret','Devueltos']].map(([v,l])=>
       `<div class="rchip ${S.retFilter===v?'on':''}" onclick="S.retFilter='${v}';renderRecords()">${l}</div>`
     ).join('')}
@@ -1719,22 +1821,6 @@ function renderRecords(){
 }
 
 // ── EXCEL ──
-function exportBooks(){
-  if(!S.books.length){showToast('⚠ No hay libros para exportar');return}
-  const cols=['Título','Autor','Código'];
-  const rows=S.books.map(b=>[b.title,b.author||'',b.code||'']);
-  const escape=v=>'"'+String(v||'').replace(/"/g,'""')+'"';
-  const csv='\uFEFF'+[cols,...rows].map(r=>r.map(escape).join(',')).join('\r\n');
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  a.download='Libros_Vimenti_'+new Date().toISOString().slice(0,10)+'.csv';
-  document.body.appendChild(a);a.click();
-  document.body.removeChild(a);URL.revokeObjectURL(url);
-  showToast('✅ Lista de libros descargada');
-}
-
 function exportExcel(){
   if(!S.loans.length){showToast('⚠ No hay registros para exportar');return}
 
