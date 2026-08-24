@@ -1633,7 +1633,16 @@ function renderLoanSuccess(){
   </div></div>`;
 }
 
-function goLS(n){S.loanStep=n;renderLoan()}
+function goLS(n){
+  // When moving from step 0 to 1, ensure registrar is set
+  if(S.loanStep===0 && n===1){
+    if(S.regType==='student' && !S.selRegistrar){
+      S.selRegistrar={id:'student',name:'Estudiante',role:'student'};
+    }
+  }
+  S.loanStep=n;
+  renderLoan();
+}
 function pickGroup(groupId,grade){S.selGroup=groupId;S.selGrade=grade;S.selStudent=null;renderLoan()}
 function pickStudent(s){
   S.selStudent=s;
@@ -1648,12 +1657,13 @@ function pickBook(b){S.selBook=b;renderLoan()}
 
 function confirmLoan(){
   const cat=S.selBook?.cat||'Ficción y Cuentos';
-  const reg=S.selRegistrar||{id:'unknown',name:'',role:'student'};
+  const reg=S.selRegistrar||{id:'unknown',name:'Sin registrador',role:'student'};
+  const regName=reg.name||reg.id||'Sin registrador';
   S.loans.push({
     id:'l'+Date.now(),
     studentId:S.selStudent.id,studentName:S.selStudent.name,
     grade:S.selGrade,group:S.selGroup||'',
-    registrarId:reg.id,registrarName:reg.name,registrarRole:reg.role,
+    registrarId:reg.id,registrarName:regName,registrarRole:reg.role,
     bookId:S.selBook.id,bookTitle:S.selBook.title,bookCode:S.selBook.code||'',
     bookCat:cat,period:ACTIVE_PERIOD,
     loanDate:new Date().toISOString(),
