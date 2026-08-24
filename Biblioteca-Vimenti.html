@@ -454,7 +454,13 @@ const TEACHERS=[
   {id:'t11',name:'Keyshla Marrero',grade:'special',group:'Especial',role:'teacher'},
 ];
 
-const REPS=[]; // 5 representatives - add from Admin when ready
+const REPS=[
+  {id:'r90',name:'Fabián',grade:'third',group:'3-2',role:'rep',color:'#E91E63'},
+  {id:'r83',name:'Amaia',grade:'third',group:'3-2',role:'rep',color:'#9C27B0'},
+  {id:'r100',name:'Zarek',grade:'third',group:'3-1',role:'rep',color:'#2196F3'},
+  {id:'r94',name:'Naybeth',grade:'third',group:'3-1',role:'rep',color:'#009688'},
+  {id:'r88',name:'Deborah',grade:'third',group:'3-1',role:'rep',color:'#FF9800'},
+];
 
 const ACTIVE_PERIOD='2026-2027 · Primer Semestre';
 const GRADES=[
@@ -1371,7 +1377,7 @@ const DEF_BOOKS=[
   {id:'lb762',title:'You Can Do It, Pout-Pout Fish!',author:'Deborah Diesen',code:''}
 ];
 
-let S={loanStep:1,selGrade:null,selGroup:null,selStudent:null,selBook:null,stuSearch:'',bookSearch:'',loanDays:3,loans:[],students:[...DEF_STU],books:[...DEF_BOOKS],retFilter:'all',retFoundLoan:null};
+let S={loanStep:1,regType:null,selRegistrar:null,selGrade:null,selGroup:null,selStudent:null,selBook:null,stuSearch:'',bookSearch:'',selCat:'',loanDays:3,loans:[],students:[...DEF_STU],books:[...DEF_BOOKS],retFilter:'all',retFoundLoan:null,reps:[...REPS]};
 try{
   const sv=localStorage.getItem('vmlib2')||localStorage.getItem('vmlib');
   if(sv){
@@ -1450,42 +1456,34 @@ function renderRegistrarStep(){
   ];
   let chipsHtml='';
   if(S.regType==='teacher'){
-    chipsHtml=`<div style="margin-top:16px"><div style="font-size:0.78rem;color:var(--mu);margin-bottom:10px">Selecciona tu nombre:</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      ${TEACHERS.map(t=>`<button onclick="selectRegistrar('${t.id}','${t.name.replace(/'/g,"\'")}','teacher')"
-        style="padding:9px 16px;border-radius:20px;border:1.5px solid ${S.selRegistrar?.id===t.id?'var(--or)':'var(--wm)'};
-        background:${S.selRegistrar?.id===t.id?'var(--or)':'white'};font-size:0.82rem;font-family:DM Sans,sans-serif;
-        cursor:pointer;font-weight:${S.selRegistrar?.id===t.id?'600':'400'}">${t.name}</button>`).join('')}
-    </div></div>`;
+    chipsHtml='<div style="margin-top:16px"><div style="font-size:0.78rem;color:var(--mu);margin-bottom:10px">Selecciona tu nombre:</div><div style="display:flex;flex-wrap:wrap;gap:8px">';
+    TEACHERS.forEach(t=>{
+      const active=S.selRegistrar?.id===t.id;
+      chipsHtml+=`<button onclick="selectRegistrar('${t.id}','${t.name}','teacher')" style="padding:9px 16px;border-radius:20px;border:1.5px solid ${active?'var(--or)':'var(--wm)'};background:${active?'var(--or)':'white'};font-size:0.82rem;font-family:DM Sans,sans-serif;cursor:pointer;font-weight:${active?600:400}">${t.name}</button>`;
+    });
+    chipsHtml+='</div></div>';
   } else if(S.regType==='rep'){
     const reps=S.reps||[];
-    chipsHtml=`<div style="margin-top:16px"><div style="font-size:0.78rem;color:var(--mu);margin-bottom:10px">Selecciona tu nombre:</div>
-    ${reps.length?`<div style="display:flex;flex-wrap:wrap;gap:8px">
-      ${reps.map(r=>`<button onclick="selectRegistrar('${r.id}','${r.name.replace(/'/g,"\'")}','rep')"
-        style="padding:9px 16px;border-radius:20px;border:1.5px solid ${S.selRegistrar?.id===r.id?'var(--or)':'var(--wm)'};
-        background:${S.selRegistrar?.id===r.id?'var(--or)':'white'};font-size:0.82rem;font-family:DM Sans,sans-serif;cursor:pointer">${r.name}</button>`).join('')}
-    </div>` : '<div style="color:var(--mu);font-size:0.82rem;padding:12px;background:var(--wm);border-radius:10px">Los representantes se configuran en ⚙ Admin</div>'}
-    </div>`;
+    if(reps.length){
+      chipsHtml='<div style="margin-top:16px"><div style="font-size:0.78rem;color:var(--mu);margin-bottom:10px">Selecciona tu nombre:</div><div style="display:flex;flex-wrap:wrap;gap:8px">';
+      reps.forEach(r=>{
+        const active=S.selRegistrar?.id===r.id;
+        const color=r.color||'var(--or)';
+        chipsHtml+=`<button onclick="selectRegistrar('${r.id}','${r.name}','rep')" style="padding:9px 16px;border-radius:20px;border:2px solid ${active?color:'var(--wm)'};background:${active?color:'white'};color:${active?'white':'#333'};font-size:0.82rem;font-family:DM Sans,sans-serif;cursor:pointer;font-weight:600;transition:all 0.15s">${r.name}</button>`;
+      });
+      chipsHtml+='</div></div>';
+    } else {
+      chipsHtml='<div style="margin-top:12px;color:var(--mu);font-size:0.82rem;padding:12px;background:var(--wm);border-radius:10px">Los representantes se configuran en ⚙ Admin</div>';
+    }
   }
-  return `<div class="card">
-    <div class="ct">¿Quién registra?</div>
-    <div class="cs">Selecciona el tipo y luego tu nombre</div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      ${types.map(t=>`<button onclick="selectRegType('${t.id}')"
-        style="border:2px solid ${S.regType===t.id?'var(--or)':'var(--wm)'};border-radius:14px;padding:14px 18px;
-        display:flex;align-items:center;gap:14px;cursor:pointer;background:${S.regType===t.id?'var(--or-lt)':'white'};
-        text-align:left;width:100%;transition:all 0.15s">
-        <span style="font-size:1.5rem">${t.emoji}</span>
-        <div><div style="font-weight:600;font-size:0.92rem">${t.label}</div>
-        <div style="font-size:0.74rem;color:var(--mu)">${t.desc}</div></div>
-      </button>`).join('')}
-    </div>
-    ${chipsHtml}
-  </div>
-  <button class="btnp" onclick="${S.regType==='student'?'goLS(1)':'goLS(1)'}"
-    ${!S.selRegistrar&&S.regType!=='student'?'disabled':''}>
-    ${S.regType==='student'?'Continuar →':'Continuar →'}
-  </button>`;
+
+  const types_html=types.map(t=>{
+    const active=S.regType===t.id;
+    return `<button onclick="selectRegType('${t.id}')" style="border:2px solid ${active?'var(--or)':'var(--wm)'};border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;background:${active?'rgba(245,166,35,0.08)':'white'};text-align:left;width:100%;transition:all 0.15s"><span style="font-size:1.5rem">${t.emoji}</span><div><div style="font-weight:600;font-size:0.92rem">${t.label}</div><div style="font-size:0.74rem;color:var(--mu)">${t.desc}</div></div></button>`;
+  }).join('');
+
+  const canContinue=S.regType==='student'||S.selRegistrar;
+  return '<div class="card"><div class="ct">¿Quién registra?</div><div class="cs">Selecciona el tipo y luego tu nombre</div><div style="display:flex;flex-direction:column;gap:10px">'+types_html+'</div>'+chipsHtml+'</div><button class="btnp" onclick="goLS(1)" '+(canContinue?'':'disabled')+'>Continuar →</button>';
 }
 
 function selectRegType(type){
