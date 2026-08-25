@@ -457,6 +457,8 @@ const TEACHERS=[
   {id:'t11',name:'Keyshla Marrero',grade:'special',group:'Especial',role:'teacher'},
 ];
 
+const ACTIVE_PERIOD='2026-2027 · Primer Semestre';
+
 const REPS=[
   {id:'r90',name:'Fabián',grade:'third',group:'3-2',role:'rep',color:'#E91E63'},
   {id:'r83',name:'Amaia',grade:'third',group:'3-2',role:'rep',color:'#9C27B0'},
@@ -465,7 +467,52 @@ const REPS=[
   {id:'r88',name:'Deborah',grade:'third',group:'3-1',role:'rep',color:'#FF9800'},
 ];
 
-const ACTIVE_PERIOD='2026-2027 · Primer Semestre';
+const HIST_LOANS=[
+{id:'lhist0',studentId:'old1',studentName:'Helen Sophia Soler Grajales',grade:'third',group:'3-2',bookTitle:'Todos los días son buenos',bookCode:'9788416427635',loanDate:'2026-05-01T12:00:00.000Z',dueDate:'2026-05-04T12:00:00.000Z',returned:true,returnDate:'2026-05-07T12:00:00.000Z'},
+{id:'lhist1',studentId:'old2',studentName:'Ian Jenniel Carrasquillo Pérez',grade:'third',group:'3-2',bookTitle:'Los caballitos de mar se mudan de coral Parte 2',bookCode:'97817367477322',loanDate:'2026-05-01T12:00:00.000Z',dueDate:'2026-05-04T12:00:00.000Z',returned:true,returnDate:'2026-05-07T12:00:00.000Z'},
+{id:'lhist2',studentId:'r89',studentName:'Dylan Amadeus Colón Morales',grade:'second',group:'2-1',bookTitle:'Pop-up Luna',bookCode:'',loanDate:'2026-05-11T12:00:00.000Z',dueDate:'2026-05-13T12:00:00.000Z',returned:true,returnDate:'2026-05-13T12:00:00.000Z'},
+{id:'lhist3',studentId:'old3',studentName:'Vanellys Zoé Negrón Castro',grade:'second',group:'2-1',bookTitle:'SISTEMA SOLAR',bookCode:'',loanDate:'2026-05-11T12:00:00.000Z',dueDate:'2026-05-13T12:00:00.000Z',returned:true,returnDate:'2026-05-12T12:00:00.000Z'},
+{id:'lhist4',studentId:'r96',studentName:'Silvia Lissette Núñez Cepeda',grade:'second',group:'2-1',bookTitle:'Hermanas',bookCode:'9781546176527',loanDate:'2026-05-11T12:00:00.000Z',dueDate:'2026-05-13T12:00:00.000Z',returned:true,returnDate:'2026-05-13T12:00:00.000Z'},
+{id:'lhist5',studentId:'r100',studentName:'Zarek Pérez Balado',grade:'second',group:'2-1',bookTitle:'Narval Un Profe Genial',bookCode:'9788426147356',loanDate:'2026-05-11T12:00:00.000Z',dueDate:'2026-05-13T12:00:00.000Z',returned:true,returnDate:'2026-05-12T12:00:00.000Z'},
+{id:'lhist6',studentId:'r94',studentName:'Naybeth Sophia Cortés Esquilín',grade:'second',group:'2-1',bookTitle:'Coco (Col. Miranda)',bookCode:'',loanDate:'2026-05-12T12:00:00.000Z',dueDate:'2026-05-14T12:00:00.000Z',returned:true,returnDate:'2026-05-15T12:00:00.000Z'},
+{id:'lhist7',studentId:'r92',studentName:'Isabelle Beatrice Velázquez Batista',grade:'second',group:'2-1',bookTitle:'Un paseo por el río (Col. Los cuadernos de Violeta)',bookCode:'',loanDate:'2026-05-12T12:00:00.000Z',dueDate:'2026-05-14T12:00:00.000Z',returned:true,returnDate:'2026-05-13T12:00:00.000Z'},
+{id:'lhist8',studentId:'r89',studentName:'Dylan Amadeus Colón Morales',grade:'second',group:'2-1',bookTitle:'La Joven Maestra Y La Gran Serpiente',bookCode:'9788426145987',loanDate:'2026-05-12T12:00:00.000Z',dueDate:'2026-05-14T12:00:00.000Z',returned:true,returnDate:'2026-05-14T12:00:00.000Z'},
+{id:'lhist9',studentId:'r100',studentName:'Zarek Pérez Balado',grade:'second',group:'2-1',bookTitle:'Srta. Campista',bookCode:'9781546176565',loanDate:'2026-05-12T12:00:00.000Z',dueDate:'2026-05-14T12:00:00.000Z',returned:true,returnDate:'2026-05-13T12:00:00.000Z'},
+{id:'lhist10',studentId:'r90',studentName:'Fabián Samir Negrón Cáez',grade:'second',group:'2-1',bookTitle:'El Gran Concurso De La Caca',bookCode:'9788419607089',loanDate:'2026-05-12T12:00:00.000Z',dueDate:'2026-05-14T12:00:00.000Z',returned:true,returnDate:'2026-05-14T12:00:00.000Z'},
+{id:'lhist11',studentId:'r95',studentName:'Rafael Mikael Aponte Carrasco',grade:'second',group:'2-1',bookTitle:'David Pichon',bookCode:'9788419401311',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-13T12:00:00.000Z'},
+{id:'lhist12',studentId:'r87',studentName:'Chrisleanis Rodríguez Cruz',grade:'second',group:'2-1',bookTitle:'El detective Gatlock: Las croquetas envenenadas',bookCode:'',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-14T12:00:00.000Z'},
+{id:'lhist13',studentId:'r99',studentName:'Yotham Khalim Quezada Willmore',grade:'second',group:'2-1',bookTitle:'Quien Fue Walt Disney',bookCode:'9780448458762',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-14T12:00:00.000Z'},
+{id:'lhist14',studentId:'r83',studentName:'Amaia Zoé Alberto Burgos',grade:'second',group:'2-1',bookTitle:'Aurora y el Orco: El nuevo del cole',bookCode:'',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-14T12:00:00.000Z'},
+{id:'lhist15',studentId:'r92',studentName:'Isabelle Beatrice Velázquez Batista',grade:'second',group:'2-1',bookTitle:'La cabaña del bosque (Col. Los cuadernos de Violeta)',bookCode:'',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-14T12:00:00.000Z'},
+{id:'lhist16',studentId:'r91',studentName:'Ian Caleb Liz Santa',grade:'second',group:'2-1',bookTitle:'La Guerra De Las Hormigas',bookCode:'9788491018704',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-15T12:00:00.000Z'},
+{id:'lhist17',studentId:'r98',studentName:'Yamil Manuel Vargas Miranda',grade:'second',group:'2-1',bookTitle:'David Pichon',bookCode:'9788419401311',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-14T12:00:00.000Z'},
+{id:'lhist18',studentId:'r84',studentName:'Amy Khloe Pizarro Santini',grade:'second',group:'2-1',bookTitle:'Aurora y el Orco: En el mundo de los elfos',bookCode:'',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-14T12:00:00.000Z'},
+{id:'lhist19',studentId:'r105',studentName:'Brian Joniel Arredondo De La Cruz',grade:'second',group:'2-2',bookTitle:'Acceso Total Lionel Messi',bookCode:'9781546176534',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-08-24T12:00:00.000Z'},
+{id:'lhist20',studentId:'r102',studentName:'Ainoah Lemysh Báez Peñaloza',grade:'second',group:'2-2',bookTitle:'Srta. Campista',bookCode:'9781546176565',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-19T12:00:00.000Z'},
+{id:'lhist21',studentId:'r100',studentName:'Zarek Pérez Balado',grade:'second',group:'2-1',bookTitle:'Garfunkel En Directo',bookCode:'9788491018087',loanDate:'2026-05-13T12:00:00.000Z',dueDate:'2026-05-15T12:00:00.000Z',returned:true,returnDate:'2026-05-14T12:00:00.000Z'},
+{id:'lhist22',studentId:'r87',studentName:'Chrisleanis Rodríguez Cruz',grade:'second',group:'2-1',bookTitle:'El detective Gatlock: El robo del collar de la reina',bookCode:'',loanDate:'2026-05-15T12:00:00.000Z',dueDate:'2026-05-17T12:00:00.000Z',returned:true,returnDate:'2026-05-19T12:00:00.000Z'},
+{id:'lhist23',studentId:'r95',studentName:'Rafael Mikael Aponte Carrasco',grade:'second',group:'2-1',bookTitle:'El Club De Comics De Supergatito',bookCode:'9781338849226',loanDate:'2026-05-15T12:00:00.000Z',dueDate:'2026-05-17T12:00:00.000Z',returned:true,returnDate:'2026-05-19T12:00:00.000Z'},
+{id:'lhist24',studentId:'r83',studentName:'Amaia Zoé Alberto Burgos',grade:'second',group:'2-1',bookTitle:'El Gran Concurso De La Caca',bookCode:'9788419607089',loanDate:'2026-05-15T12:00:00.000Z',dueDate:'2026-05-17T12:00:00.000Z',returned:true,returnDate:'2026-08-24T12:00:00.000Z'},
+{id:'lhist25',studentId:'r94',studentName:'Naybeth Sophia Cortés Esquilín',grade:'second',group:'2-1',bookTitle:'Pop-up Luna',bookCode:'',loanDate:'2026-05-15T12:00:00.000Z',dueDate:'2026-05-17T12:00:00.000Z',returned:true,returnDate:'2026-05-19T12:00:00.000Z'},
+{id:'lhist26',studentId:'r90',studentName:'Fabián Samir Negrón Cáez',grade:'second',group:'2-1',bookTitle:'Lombriz y urraca',bookCode:'',loanDate:'2026-05-15T12:00:00.000Z',dueDate:'2026-05-17T12:00:00.000Z',returned:true,returnDate:'2026-05-19T12:00:00.000Z'},
+{id:'lhist27',studentId:'old4',studentName:'Alahia Itzel Díaz Torres',grade:'first',group:'1-2',bookTitle:'¡Esto NO es un unicornio!',bookCode:'',loanDate:'2026-06-10T12:00:00.000Z',dueDate:'2026-06-12T12:00:00.000Z',returned:true,returnDate:'2026-08-24T12:00:00.000Z'},
+{id:'lhist28',studentId:'old4',studentName:'Alahia Itzel Díaz Torres',grade:'first',group:'1-2',bookTitle:'Extraordinario abecedario',bookCode:'',loanDate:'2026-06-10T12:00:00.000Z',dueDate:'2026-06-12T12:00:00.000Z',returned:true,returnDate:'2026-08-24T12:00:00.000Z'},
+{id:'lhist29',studentId:'old4',studentName:'Alahia Itzel Díaz Torres',grade:'first',group:'1-2',bookTitle:'Pop-up Tierra',bookCode:'',loanDate:'2026-06-10T12:00:00.000Z',dueDate:'2026-06-12T12:00:00.000Z',returned:true,returnDate:'2026-08-24T12:00:00.000Z'},
+{id:'lhist30',studentId:'old4',studentName:'Alahia Itzel Díaz Torres',grade:'first',group:'1-2',bookTitle:'De rayas es mi pijama: Adivinanzas y trabalenguas',bookCode:'',loanDate:'2026-06-10T12:00:00.000Z',dueDate:'2026-06-12T12:00:00.000Z',returned:true,returnDate:'2026-08-24T12:00:00.000Z'},
+{id:'lhist31',studentId:'old4',studentName:'Alahia Itzel Díaz Torres',grade:'first',group:'1-2',bookTitle:'La vida secreta de los mocos',bookCode:'',loanDate:'2026-06-10T12:00:00.000Z',dueDate:'2026-06-12T12:00:00.000Z',returned:true,returnDate:'2026-08-24T12:00:00.000Z'},
+{id:'lhist32',studentId:'old4',studentName:'Alahia Itzel Díaz Torres',grade:'first',group:'1-2',bookTitle:'Pulga busca perro',bookCode:'',loanDate:'2026-06-10T12:00:00.000Z',dueDate:'2026-06-12T12:00:00.000Z',returned:true,returnDate:'2026-08-24T12:00:00.000Z'},
+{id:'lhist33',studentId:'old4',studentName:'Alahia Itzel Díaz Torres',grade:'first',group:'1-2',bookTitle:'¡He visto un mamut!',bookCode:'',loanDate:'2026-06-10T12:00:00.000Z',dueDate:'2026-06-12T12:00:00.000Z',returned:true,returnDate:'2026-08-24T12:00:00.000Z'},
+{id:'lhist34',studentId:'r94',studentName:'Naybeth Sophia Cortés Esquilín',grade:'third',group:'3-1',bookTitle:'Hermanas',bookCode:'9781546176527',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null},
+{id:'lhist35',studentId:'r88',studentName:'Deborah Soler Grajales',grade:'third',group:'3-1',bookTitle:'Pop-up Volcanes',bookCode:'',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null},
+{id:'lhist36',studentId:'r90',studentName:'Fabián Samir Negrón Cáez',grade:'third',group:'3-2',bookTitle:'Pop-up Bosques',bookCode:'',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null},
+{id:'lhist37',studentId:'r100',studentName:'Zarek Pérez Balado',grade:'third',group:'3-1',bookTitle:'Quien Es Michael Jordan',bookCode:'9780593522677',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null},
+{id:'lhist38',studentId:'r116',studentName:'Naithans Anthony Reyes Rivera',grade:'third',group:'3-2',bookTitle:'El pececito blanco ya sabe mucho',bookCode:'',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null},
+{id:'lhist39',studentId:'r52',studentName:'Kyan Alexis Padilla Alemán',grade:'second',group:'2-1',bookTitle:'Los Monstruos (Enciclopedia de Seres Mágicos)',bookCode:'',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null},
+{id:'lhist40',studentId:'n342',studentName:'Kattaleia González Hernández',grade:'second',group:'2-1',bookTitle:'El Club De Comics De Supergatito',bookCode:'9781338849226',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null},
+{id:'lhist41',studentId:'r46',studentName:'Estefan Damian Pérez Cruz',grade:'second',group:'2-1',bookTitle:'Los humanos',bookCode:'',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null},
+{id:'lhist42',studentId:'r57',studentName:'Penélope Arlett Rosario Ocasio',grade:'second',group:'2-2',bookTitle:'El Club De Comics De Supergatito',bookCode:'9781338849226',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null},
+{id:'lhist43',studentId:'r60',studentName:'Vicnielys Antonella Esquilín Fonseca',grade:'second',group:'2-2',bookTitle:'El charlatansaurio (Col. Rachel Bright)',bookCode:'',loanDate:'2026-08-24T12:00:00.000Z',dueDate:'2026-08-26T12:00:00.000Z',returned:false,returnDate:null}
+];
 const GRADES=[
   {id:'kinder',name:'Kínder',emoji:'🌱'},
   {id:'first',name:'1er Grado',emoji:'⭐'},
@@ -1385,23 +1432,22 @@ try{
   const sv=localStorage.getItem('vmlib2')||localStorage.getItem('vmlib');
   if(sv){
     const p=JSON.parse(sv);
-    S.loans=p.loans||[];
-    S.students=p.students||[...DEF_STU];
-    // Always use DEF_STU as base — update existing students, add manually-added ones
+    const savedIds=new Set((p.loans||[]).map(l=>l.id));
+    const histToAdd=HIST_LOANS.filter(l=>!savedIds.has(l.id));
+    S.loans=[...(p.loans||[]),...histToAdd];
+    S.loanDays=p.loanDays||3;
     const defStuIds=new Set(DEF_STU.map(s=>s.id));
     const manualStudents=(p.students||[]).filter(s=>!defStuIds.has(s.id));
     S.students=[...DEF_STU,...manualStudents];
-    S.loanDays=p.loanDays||3;
-    // Always start with full DEF_BOOKS, then add any manually-added books not in default list
     const defIds=new Set(DEF_BOOKS.map(b=>b.id));
     const manualBooks=(p.books||[]).filter(b=>!defIds.has(b.id));
-    // Apply any code/author edits saved for existing books
     const savedById={};(p.books||[]).forEach(b=>savedById[b.id]=b);
     S.books=DEF_BOOKS.map(b=>savedById[b.id]?{...b,...savedById[b.id],id:b.id}:b);
     S.books=[...S.books,...manualBooks];
+  } else {
+    S.loans=[...HIST_LOANS];
   }
-}catch(e){}
-function save(){try{localStorage.setItem('vmlib2',JSON.stringify({loans:S.loans,students:S.students,books:S.books,loanDays:S.loanDays}))}catch(e){}}
+}catch(e){S.loans=[...HIST_LOANS];}
 
 const fmt=d=>new Date(d).toLocaleDateString('es-PR',{day:'numeric',month:'short',year:'numeric'});
 const fmts=d=>new Date(d).toLocaleDateString('es-PR',{day:'numeric',month:'short'});
