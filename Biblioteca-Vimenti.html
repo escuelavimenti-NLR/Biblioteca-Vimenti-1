@@ -14,7 +14,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bk);color:var(--bk);-webk
 .view{position:absolute;inset:0;display:none;flex-direction:column;background:var(--cr);overflow:hidden}
 .view.show{display:flex}
 #v-home{background:var(--bk);justify-content:flex-end;padding:0}
-.home-art{position:absolute;top:0;left:0;right:0;height:52%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:1}
+.home-art{position:absolute;top:0;left:0;right:0;height:52%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:1;pointer-events:none}
 .home-rings{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .ring{position:absolute;border-radius:50%;border:1px solid rgba(245,166,35,0.1);transform:translate(-50%,-50%)}
 .home-mark{width:68px;height:68px;background:var(--or);clip-path:polygon(0 0,68% 0,100% 32%,100% 100%,0 100%);display:flex;align-items:center;justify-content:center;position:relative;z-index:2}
@@ -408,4 +408,4 @@ body{font-family:'DM Sans',sans-serif;background:var(--bk);color:var(--bk);-webk
     <div class="fmt-hint">
       <strong>Formato del Excel para importar:</strong>
       <div class="fmt-cols">
-        <span class="fmt-col req">Título <small>(requerido)</small></sp
+        <span class="fmt-col req">Título <small>(re
